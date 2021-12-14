@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\ToDoList;
 use Carbon\Carbon;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,9 +21,13 @@ class UserController extends AbstractController
         $u->setPassword("ardqsdqss");
         $u->setDateNaissance(Carbon::now()->subYears(21));
 
+        $t = new ToDoList();
+        $t->setUtilisateurs($u);
+
         if ($u->isValid()){
             $em = $this->getDoctrine()->getManager();
             $em->persist($u);
+            $em->persist($t);
             $em->flush();
         }
 

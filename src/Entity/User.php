@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Carbon\Carbon;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
  */
-class User
+class User extends AbstractController
 {
     /**
      * @ORM\Id
@@ -43,6 +44,11 @@ class User
      * @ORM\Column(type="string", length=40)
      */
     private $password;
+
+    /**
+     * @ORM\OneToOne(targetEntity=ToDoList::class, mappedBy="utilisateurs", cascade={"persist", "remove"})
+     */
+    private $toDoList;
 
     public function getId(): ?int
     {
@@ -105,6 +111,25 @@ class User
                     $carbon = new Carbon($this->dateNaissance, new \DateTimeZone('Europe/Paris'));
 
                     if (Carbon::parse($carbon)->age > 12) {
+                        $u = new User();
+                        $u->setNom($this->getNom());
+                        $u->setPrenom($this->getPrenom());
+                        $u->setEmail($this->getEmail());
+                        $u->setPassword($this->getPassword());
+                        $u->setDateNaissance($carbon);
+
+                        print_r($u);
+
+//                        $t = new ToDoList();
+//                        $t->setUtilisateurs($u);
+
+
+                        $em = $this->getDoctrine()->getManager();
+                        $em->persist($u);
+//                        $em->persist($t);
+                        $em->flush();
+
+
                         return true;
                     }else{
                         throw new \Exception("trop petit");
@@ -126,6 +151,28 @@ class User
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function getToDoList(): ?ToDoList
+    {
+        return $this->toDoList;
+    }
+
+    public function setToDoList(?ToDoList $toDoList): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($toDoList === null && $this->toDoList !== null) {
+            $this->toDoList->setUtilisateurs(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($toDoList !== null && $toDoList->getUtilisateurs() !== $this) {
+            $toDoList->setUtilisateurs($this);
+        }
+
+        $this->toDoList = $toDoList;
 
         return $this;
     }
