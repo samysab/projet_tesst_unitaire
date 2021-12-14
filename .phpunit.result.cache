@@ -1,1 +1,1 @@
-{"version":1,"defects":[],"times":[]}
+{"version":1,"defects":{"UserTest::test_valid":4,"UserTest::test_invalid_age":3,"UserTest::test_mock_unimplemented":4,"UserTest::test_mock_implemented":4},"times":{"UserTest::test_valid":0.061,"UserTest::test_invalid_age":0.002,"UserTest::test_mock_unimplemented":0,"UserTest::test_mock_implemented":0.005}}

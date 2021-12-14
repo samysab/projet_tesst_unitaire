@@ -17,21 +17,4 @@ class UserController extends AbstractController
             'controller_name' => 'UserController',
         ]);
     }
-
-    public function isValid(){
-        if ($this->email != null && filter_var($this->email, FILTER_VALIDATE_EMAIL)){
-            if ($this->nom != null && $this->prenom != null){
-
-                $carbon = new Carbon($this->dateNaissance, new DateTimeZone('Europe/Paris'));
-
-                if (Carbon::parse($carbon)->age > 12) {
-                    return true;
-                }else{
-                    throw new Exception("trop petit");
-                }
-            }
-        }else{
-            throw new Exception("arg manquant");
-        }
-    }
 }
