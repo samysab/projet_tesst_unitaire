@@ -99,7 +99,7 @@ class User
 
     public function isValid(){
         if ($this->email != null && filter_var($this->email, FILTER_VALIDATE_EMAIL)){
-            if(strlen($this->getPassword()) > 8 || strlen($this->getPassword()) < 40){
+            if(strlen($this->getPassword()) > 8 && strlen($this->getPassword()) < 40){
                 if ($this->nom != null && $this->prenom != null){
 
                     $carbon = new Carbon($this->dateNaissance, new \DateTimeZone('Europe/Paris'));

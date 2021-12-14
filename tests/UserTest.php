@@ -10,6 +10,7 @@ class UserTest extends TestCase
         $u->setNom("sab");
         $u->setPrenom("samy");
         $u->setEmail("samy@gmail.com");
+        $u->setPassword("aaaaaaaaaaaaa");
         $u->setDateNaissance(Carbon::now()->subYears(21));
         $result = $u->isValid();
         $this->assertEquals(true, $result, 'test valid');
@@ -20,6 +21,7 @@ class UserTest extends TestCase
         $u->setNom("sab");
         $u->setPrenom("samy");
         $u->setEmail("samy@gmail.com");
+        $u->setPassword("aaaaaaaaaaaaaa");
         $u->setDateNaissance(Carbon::now()->subYears(10));
         $this->expectException(Exception::class);
         $result = $u->isValid();
@@ -41,7 +43,7 @@ class UserTest extends TestCase
         $u->setNom("sab");
         $u->setPrenom("samy");
         $u->setEmail("samy@gmail.com");
-        $u->setPassword("ddd");
+        $u->setPassword("ars");
         $u->setDateNaissance(Carbon::now()->subYears(21));
         $this->expectException(Exception::class);
         $result = $u->isValid();
