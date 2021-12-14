@@ -35,7 +35,7 @@ class User
     private $prenom;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="string", length=255)
      */
     private $dateNaissance;
 
