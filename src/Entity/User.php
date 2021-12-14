@@ -39,6 +39,11 @@ class User
      */
     private $dateNaissance;
 
+    /**
+     * @ORM\Column(type="string", length=40)
+     */
+    private $password;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -94,18 +99,34 @@ class User
 
     public function isValid(){
         if ($this->email != null && filter_var($this->email, FILTER_VALIDATE_EMAIL)){
-            if ($this->nom != null && $this->prenom != null){
+            if(strlen($this->getPassword()) > 8 || strlen($this->getPassword()) < 40){
+                if ($this->nom != null && $this->prenom != null){
 
-                $carbon = new Carbon($this->dateNaissance, new \DateTimeZone('Europe/Paris'));
+                    $carbon = new Carbon($this->dateNaissance, new \DateTimeZone('Europe/Paris'));
 
-                if (Carbon::parse($carbon)->age > 12) {
-                    return true;
-                }else{
-                    throw new \Exception("trop petit");
+                    if (Carbon::parse($carbon)->age > 12) {
+                        return true;
+                    }else{
+                        throw new \Exception("trop petit");
+                    }
                 }
+            }else{
+                throw new \Exception("Le mot de passe doit être compris entre 8 et 40 caracteres");
             }
         }else{
             throw new \Exception("arg manquant");
         }
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
     }
 }
