@@ -594,9 +594,12 @@ class ComposerStaticInit4b95cb9abc78a308e6baa688bbef448d
     );
 
     public static $classMap = array (
+        'App\\Controller\\ToDoListController' => __DIR__ . '/../..' . '/src/Controller/ToDoListController.php',
         'App\\Controller\\UserController' => __DIR__ . '/../..' . '/src/Controller/UserController.php',
+        'App\\Entity\\ToDoList' => __DIR__ . '/../..' . '/src/Entity/ToDoList.php',
         'App\\Entity\\User' => __DIR__ . '/../..' . '/src/Entity/User.php',
         'App\\Kernel' => __DIR__ . '/../..' . '/src/Kernel.php',
+        'App\\Repository\\ToDoListRepository' => __DIR__ . '/../..' . '/src/Repository/ToDoListRepository.php',
         'App\\Repository\\UserRepository' => __DIR__ . '/../..' . '/src/Repository/UserRepository.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Carbon\\AbstractTranslator' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/AbstractTranslator.php',

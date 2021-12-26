@@ -5,7 +5,7 @@ use Carbon\Carbon;
 class UserTest extends TestCase
 {
 
-    public function test_valid(){
+ /*   public function test_valid(){
         $u = new \App\Entity\User();
         $u->setNom("sab");
         $u->setPrenom("samy");
@@ -47,5 +47,18 @@ class UserTest extends TestCase
         $u->setDateNaissance(Carbon::now()->subYears(21));
         $this->expectException(Exception::class);
         $result = $u->isValid();
+
+    }*/
+
+    public function test_samy(){
+        $controller = new \App\Controller\UserController();
+        $u = new \App\Entity\User();
+        $u->setNom("sab");
+        $u->setPrenom("samy");
+        $u->setEmail("samy@gmail.com");
+        $u->setPassword("aaaaaaaaaaaaa");
+        $u->setDateNaissance(Carbon::now()->subYears(21));
+        $result = $controller->isValid($u);
+        $this->assertEquals(true, $result, 'test password valid');
     }
 }

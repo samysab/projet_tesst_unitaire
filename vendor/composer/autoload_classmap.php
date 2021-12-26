@@ -6,9 +6,12 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Controller\\ToDoListController' => $baseDir . '/src/Controller/ToDoListController.php',
     'App\\Controller\\UserController' => $baseDir . '/src/Controller/UserController.php',
+    'App\\Entity\\ToDoList' => $baseDir . '/src/Entity/ToDoList.php',
     'App\\Entity\\User' => $baseDir . '/src/Entity/User.php',
     'App\\Kernel' => $baseDir . '/src/Kernel.php',
+    'App\\Repository\\ToDoListRepository' => $baseDir . '/src/Repository/ToDoListRepository.php',
     'App\\Repository\\UserRepository' => $baseDir . '/src/Repository/UserRepository.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
     'Carbon\\AbstractTranslator' => $vendorDir . '/nesbot/carbon/src/Carbon/AbstractTranslator.php',
