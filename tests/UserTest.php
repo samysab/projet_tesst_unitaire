@@ -2,6 +2,9 @@
 use PHPUnit\Framework\TestCase;
 use Carbon\Carbon;
 
+use Symfony\Component\HttpFoundation\Request;
+
+
 class UserTest extends TestCase
 {
 
@@ -50,13 +53,14 @@ class UserTest extends TestCase
 
     }*/
 
+
     public function test_samy(){
         $controller = new \App\Controller\UserController();
         $u = new \App\Entity\User();
         $u->setNom("sab");
         $u->setPrenom("samy");
         $u->setEmail("samy@gmail.com");
-        $u->setPassword("aaaaaaaaaaaaa");
+        $u->setPassword("aaaaaaaaa");
         $u->setDateNaissance(Carbon::now()->subYears(21));
         $result = $controller->isValid($u);
         $this->assertEquals(true, $result, 'test password valid');

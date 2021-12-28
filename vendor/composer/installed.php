@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '90d6cfaff95f0cb75eb83e514355a4ab2c219f0c',
+        'reference' => '98ed6d69644fa167b6694766326449cb7de4e81d',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '90d6cfaff95f0cb75eb83e514355a4ab2c219f0c',
+            'reference' => '98ed6d69644fa167b6694766326449cb7de4e81d',
             'dev_requirement' => false,
         ),
         'composer/package-versions-deprecated' => array(
@@ -690,12 +690,12 @@
             'dev_requirement' => true,
         ),
         'symfony/dependency-injection' => array(
-            'pretty_version' => 'v5.3.8',
-            'version' => '5.3.8.0',
+            'pretty_version' => 'v5.3.11',
+            'version' => '5.3.11.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/dependency-injection',
             'aliases' => array(),
-            'reference' => 'e39c344e06a3ceab531ebeb6c077e6652c4a0829',
+            'reference' => '3793617321eb39b2e8e708f6fd61f875ec5f0ed6',
             'dev_requirement' => false,
         ),
         'symfony/deprecation-contracts' => array(

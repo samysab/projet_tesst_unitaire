@@ -12,6 +12,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
 {
+
+
     #[Route('/user', name: 'user')]
 /*    public function index(): Response
     {
