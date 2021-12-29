@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ItemRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,9 +29,10 @@ class Item
     private $content;
 
     /**
-     * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @ORM\Column(type="datetime")
      */
     private $created_at;
+
 
     public function getId(): ?int
     {
@@ -61,12 +63,12 @@ class Item
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt()
     {
         return $this->created_at;
     }
 
-    public function setCreatedAt(?\DateTimeImmutable $created_at): self
+    public function setCreatedAt($created_at): self
     {
         $this->created_at = $created_at;
 
@@ -77,11 +79,18 @@ class Item
 
         if (!empty($this->name)
             && !empty($this->content)
-            && !empty($this->createdAt)
+            && $this->validateDate($this->created_at)
             && strlen($this->content) <= 1000){
             return true;
         }else{
             return false;
         }
     }
+
+    function validateDate($date, $format = 'Y-m-d H:i:s')
+    {
+        $d = DateTime::createFromFormat($format, $date);
+        return $d && $d->format($format) == $date;
+    }
+
 }

@@ -14,7 +14,7 @@ class ItemTest extends TestCase
         $item = new \App\Entity\Item();
         $item->setName("sab");
         $item->setContent("sab");
-        $item->setCreatedAt(new \DateTimeImmutable("2021-05-21"));
+        $item->setCreatedAt(new DateTime('now'));
         $result = $controller->add($item);
         $this->assertEquals(true, $result, 'Item added');
     }
@@ -22,10 +22,9 @@ class ItemTest extends TestCase
     public function testValidItem(){
 
         $item = new \App\Entity\Item();
-        $item->setName("toto");
+        $item->setName("test");
         $item->setContent("toto");
-        $item->setCreatedAt(new \DateTimeImmutable("2021-05-21"));
-
+        $item->setCreatedAt('2012-02-28 12:12:12');
         $this->assertTrue($item->isValidItem());
 
     }
@@ -35,7 +34,7 @@ class ItemTest extends TestCase
         $item = new \App\Entity\Item();
         $item->setName("");
         $item->setContent("test");
-        $item->setCreatedAt(new \DateTimeImmutable("2021-05-21"));
+        $item->setCreatedAt('2012-02-28 12:12:12');
         $this->assertFalse($item->isValidItem());
     }
 
@@ -44,7 +43,7 @@ class ItemTest extends TestCase
         $item = new \App\Entity\Item();
         $item->setContent("");
         $item->setName("toto");
-        $item->setCreatedAt(new \DateTimeImmutable("2021-05-21"));
+        $item->setCreatedAt('2012-02-28 12:12:12');
         $this->assertFalse($item->isValidItem());
 
     }
@@ -63,16 +62,16 @@ class ItemTest extends TestCase
         $item = new \App\Entity\Item();
         $item->setContent("toto");
         $item->setName("toto");
-        $item->setCreatedAt(new \DateTimeImmutable("2021-05-21"));
+        $item->setCreatedAt('2012-02-28 12:12:12');
         $this->assertTrue($item->isValidItem());
     }
 
     public function testLengthContentItemFalse(){
 
         $item = new \App\Entity\Item();
-        $item->setContent("Lorem ipsum dolor sit amet. Maiores debitis quo asperiores facere ad delectus maiores a enim dolorem ex dolorem quibusdam aut sunt vitae vel veritatis fugiat. A provident facere hic laborum commodi ut nihil ipsam qui repellat ipsa nam consequatur doloremque qui earum galisum nam consectetur quia. Qui incidunt excepturi non velit quae quo corrupti sint. Qui iure rerum eum quas eius quo accusantium eligendi sit galisum cupiditate et quod laudantium! Qui Quis rerum sed exercitationem numquam id accusamus enim aut dolorem autem vel nisi laboriosam ut facere enim id enim galisum. Eos similique minus sed molestiae laudantium qui omnis deleniti ex beatae pariatur non velit accusamus.");
+        $item->setContent("Lorem ipsum dolor sit amet. Maiores debitis quo asperiores facere ad delectus maiores a enim dolorem ex dolorem quibusdam aut sunt vitae vel veritatis fugiat. A provident facere hic laborum commodi ut nihil ipsam qui repellat ipsa nam consequatur doloremque qui earum galisum nam consectetur quia. Qui incidunt excepturi non velit quae quo corrupti sint. Qui iure rerum eum quas eius quo accusantium eligendi sit galisum cupiditate et quod laudantium! Qui Quis rerum sed exercitationem numquam id accusamus enim aut dolorem autem vel nisi laboriosam ut facere enim id enim galisum. Eos similique minus sed molestiae laudantium qui omnis deleniti ex beatae pariatur non velit accusamus.Lorem ipsum dolor sit amet. Maiores debitis quo asperiores facere ad delectus maiores a enim dolorem ex dolorem quibusdam aut sunt vitae vel veritatis fugiat. A provident facere hic laborum commodi ut nihil ipsam qui repellat ipsa nam consequatur doloremque qui earum galisum nam consectetur quia. Qui incidunt excepturi non velit quae quo corrupti sint. Qui iure rerum eum quas eius quo accusantium eligendi sit galisum cupiditate et quod laudantium! Qui Quis rerum sed exercitationem numquam id accusamus enim aut dolorem autem vel nisi laboriosam ut facere enim id enim galisum. Eos similique minus sed molestiae laudantium qui omnis deleniti ex beatae pariatur non velit accusamus.");
         $item->setName("toto");
-        $item->setCreatedAt(new \DateTimeImmutable("2021-05-21"));
+        $item->setCreatedAt('2012-02-28 12:12:12');
         $this->assertFalse($item->isValidItem());
     }
 }
