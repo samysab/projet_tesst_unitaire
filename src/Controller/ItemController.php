@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,8 +19,13 @@ class ItemController extends AbstractController
 
         if ($i->getName() !== null)
         {
-            $date = Carbon::now()->format('i');;
-            $carbon = new Carbon($i->getCreatedAt(), new \DateTimeZone('Europe/Paris'));
+
+
+            //$now = new DateTime(); // Date actuelle
+            //$diff = $now->diff();
+            //$min = $diff->format('%H:%I');
+
+
 
             // if (Carbon::parse($carbon)->createdAt > ) 
             // {
@@ -33,7 +39,7 @@ class ItemController extends AbstractController
             //     throw new \Exception("Vous avez créé un item il y a moins de 30min");
             // }
 
-            print_r($date);
+           // print_r($min);
             // print_r($carbon);
 
             return true;

@@ -18,4 +18,15 @@ class ItemTest extends TestCase
         $result = $controller->add($item);
         $this->assertEquals(true, $result, 'Item added');
     }
+
+    public function testValidItem(){
+
+        $item = new \App\Entity\Item();
+        $item->setName("toto");
+        $item->setContent("toto");
+        $item->setCreatedAt(new \DateTimeImmutable("2021-05-21"));
+
+        $this->assertTrue($item->isValidItem());
+
+    }
 }

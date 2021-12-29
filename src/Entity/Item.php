@@ -72,4 +72,16 @@ class Item
 
         return $this;
     }
+
+    public function isValidItem() : bool{
+
+        if (!empty($this->name)
+            && !empty($this->content)
+            && !empty($this->createdAt)
+            && strlen($this->content) <= 1000){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
