@@ -75,7 +75,7 @@ class ToDolistTest extends TestCase
         $item = new \App\Entity\Item();
         $item->setName("sab");
         $item->setContent("sab");
-        $item->setCreatedAt('2012-02-28 00:00:00');
+        $item->setCreatedAt('2021-12-29 22:20:00');
 
 
         $todo = $this->getMockBuilder(\App\Entity\ToDoList::class)->onlyMethods(['getSizeTodolist', 'getLastItem'])->getMock();
@@ -89,6 +89,31 @@ class ToDolistTest extends TestCase
 
         $this->expectException(\Exception::class);
         $result = $todo->canAddItem($item); 
+    }
+
+
+    public function testInvalidDelay(){
+        
+        $u = new \App\Entity\User();
+        $u->setNom("sab");
+        $u->setPrenom("samy");
+        $u->setEmail("samy@gmail.com");
+        $u->setPassword("aaaaaaaaaaaaa");
+        $u->setDateNaissance(Carbon::now()->subYears(21));
+
+
+        $todo = new \App\Entity\ToDoList();
+        $todo->setUtilisateur($u);
+
+        $item = new \App\Entity\Item();
+        $item->setName("sab");
+        $item->setContent("sab");
+        $item->setCreatedAt('2021-12-29 22:50:00');
+
+        $this->expectException(\Exception::class);
+        $result = $todo->canAddItem($item);
+
+
     }
 
 

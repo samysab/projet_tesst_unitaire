@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 use DateTime;
+date_default_timezone_set('Europe/Paris');
 
 /**
  * @ORM\Entity(repositoryClass=ToDoListRepository::class)
@@ -90,6 +91,8 @@ class ToDoList
         $lastItem = $this->getLastItem();
 
 
+        $diff = strtotime(date('Y-m-d H:i:s')) - strtotime($item->getCreatedAt());
+
         if(is_null($item) || !$item->isValidItem()){
             throw new \Exception('L\'item est nul ou invalide');
         }
@@ -104,7 +107,9 @@ class ToDoList
             throw new \Exception('La todo list possède beaucoup d\'item');
         }
 
-        // $this->numberItemAlert();
+        if(($diff/60) < 30 ){
+            throw new \Exception('Le délai est trop court pour créer un autre item');
+        }
 
         return true;
     }
