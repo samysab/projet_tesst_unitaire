@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Item
 {
+    
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -32,6 +33,11 @@ class Item
      * @ORM\Column(type="datetime")
      */
     private $created_at;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=ToDoList::class, inversedBy="items")
+     */
+    private $todolist;
 
 
     public function getId(): ?int
@@ -91,6 +97,18 @@ class Item
     {
         $d = DateTime::createFromFormat($format, $date);
         return $d && $d->format($format) == $date;
+    }
+
+    public function getTodolist(): ?ToDoList
+    {
+        return $this->todolist;
+    }
+
+    public function setTodolist(?ToDoList $todolist): self
+    {
+        $this->todolist = $todolist;
+
+        return $this;
     }
 
 }

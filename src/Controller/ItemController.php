@@ -13,34 +13,28 @@ use Carbon\Carbon;
 
 class ItemController extends AbstractController
 {
+
+
     #[Route('/item/create', name: 'item_create')]
 
     public function add(Item $i){
 
         if ($i->getName() !== null)
         {
+            
+            if (true) 
+            {
+                // $em = $this->getDoctrine()->getManager();
+                // $em->persist($u);
+                // $em->flush();
 
 
-            //$now = new DateTime(); // Date actuelle
-            //$diff = $now->diff();
-            //$min = $diff->format('%H:%I');
 
+                return true;
 
-
-            // if (Carbon::parse($carbon)->createdAt > ) 
-            // {
-            //     $em = $this->getDoctrine()->getManager();
-            //     $em->persist($u);
-            //     $em->flush();
-
-            //     return true;
-
-            // }else{
-            //     throw new \Exception("Vous avez créé un item il y a moins de 30min");
-            // }
-
-           // print_r($min);
-            // print_r($carbon);
+            }else{
+                throw new \Exception("Vous avez créé un item il y a moins de 30min");
+            }
 
             return true;
 

@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User
 {
+
+    
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -43,6 +45,11 @@ class User
      * @ORM\Column(type="string", length=40)
      */
     private $password;
+
+    /**
+     * @ORM\OneToOne(targetEntity=ToDoList::class, mappedBy="utilisateur", cascade={"persist", "remove"})
+     */
+    private $toDoList;
 
     public function getId(): ?int
     {
@@ -104,6 +111,18 @@ class User
         return $this;
     }
 
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
     public function isValid(){
         if ($this->email != null && filter_var($this->email, FILTER_VALIDATE_EMAIL)){
             if(strlen($this->getPassword()) > 8 && strlen($this->getPassword()) < 40){
@@ -112,6 +131,10 @@ class User
                     $carbon = new Carbon($this->dateNaissance, new \DateTimeZone('Europe/Paris'));
 
                     if (Carbon::parse($carbon)->age > 12) {
+                        $todolist = new ToDoList();
+                        $todolist->setUtilisateur($this);
+
+                        print_r($this->getTodolist());
                         return true;
                     }else{
                         throw new \Exception("trop petit");
@@ -125,14 +148,24 @@ class User
         }
     }
 
-    public function getPassword(): ?string
+    public function getToDoList(): ?ToDoList
     {
-        return $this->password;
+        return $this->toDoList;
     }
 
-    public function setPassword(string $password): self
+    public function setToDoList(?ToDoList $toDoList): self
     {
-        $this->password = $password;
+        // unset the owning side of the relation if necessary
+        if ($toDoList === null && $this->toDoList !== null) {
+            $this->toDoList->setUtilisateur(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($toDoList !== null && $toDoList->getUtilisateur() !== $this) {
+            $toDoList->setUtilisateur($this);
+        }
+
+        $this->toDoList = $toDoList;
 
         return $this;
     }
