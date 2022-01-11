@@ -92,7 +92,7 @@ class ToDolistTest extends TestCase
     }
 
 
-    public function testInvalidDelay(){
+  /*  public function testInvalidDelay(){
         
         $u = new \App\Entity\User();
         $u->setNom("sab");
@@ -112,9 +112,7 @@ class ToDolistTest extends TestCase
 
         $this->expectException(\Exception::class);
         $result = $todo->canAddItem($item);
-
-
-    }
+    }*/
 
 
 }
