@@ -12,6 +12,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
 {
+
+
     #[Route('/user', name: 'user')]
 /*    public function index(): Response
     {
@@ -42,9 +44,8 @@ class UserController extends AbstractController
                     $carbon = new Carbon($u->getDateNaissance(), new \DateTimeZone('Europe/Paris'));
 
                     if (Carbon::parse($carbon)->age > 12) {
-                        $em = $this->getDoctrine()->getManager();
-                        $em->persist($u);
-                        $em->flush();
+                        $todolist = new ToDoList();
+                        $todolist->setUtilisateur($u);
                         return true;
                     }else{
                         throw new \Exception("trop petit");

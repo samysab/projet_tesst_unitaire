@@ -13,6 +13,8 @@ return [
         '/_profiler/search_bar' => [[['_route' => '_profiler_search_bar', '_controller' => 'web_profiler.controller.profiler::searchBarAction'], null, null, null, false, false, null]],
         '/_profiler/phpinfo' => [[['_route' => '_profiler_phpinfo', '_controller' => 'web_profiler.controller.profiler::phpinfoAction'], null, null, null, false, false, null]],
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
+        '/to/do/list' => [[['_route' => 'to_do_list', '_controller' => 'App\\Controller\\ToDoListController::index'], null, null, null, false, false, null]],
+        '/user-create' => [[['_route' => 'user', '_controller' => 'App\\Controller\\UserController::isValid'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'
