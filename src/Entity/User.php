@@ -122,6 +122,9 @@ class User
 
         return $this;
     }
+    public function createUser($user){
+        return $user;
+    }
 
     public function isValid(){
         if ($this->email != null && filter_var($this->email, FILTER_VALIDATE_EMAIL)){
@@ -134,7 +137,6 @@ class User
                         $todolist = new ToDoList();
                         $todolist->setUtilisateur($this);
 
-                        print_r($this->getTodolist());
                         return true;
                     }else{
                         throw new \Exception("trop petit");

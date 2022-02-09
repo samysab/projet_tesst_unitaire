@@ -5,11 +5,15 @@ use Carbon\Carbon;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Persistence\ObjectRepository;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 use App\Mock\Database;
 
-class UserTest extends TestCase
+class UserTest extends KernelTestCase
 {
+
+    /** @var \Doctrine\ORM\EntityManager */
+    private $entityManager;
 
     public function test_valid(){
         $u = new \App\Entity\User();
@@ -18,6 +22,16 @@ class UserTest extends TestCase
         $u->setEmail("samy@gmail.com");
         $u->setPassword("aaaaaaaaaaaaa");
         $u->setDateNaissance(Carbon::now()->subYears(21));
+
+        $kernel = self::bootKernel();
+        $this->entityManager = $kernel
+            ->getContainer()
+            ->get('doctrine')
+            ->getManager();
+
+        $this->entityManager->persist($u);
+        $this->entityManager->flush();
+
         $result = $u->isValid();
         $this->assertEquals(true, $result, 'test valid');
     }
