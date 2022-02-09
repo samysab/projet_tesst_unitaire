@@ -85,7 +85,7 @@ class ToDoList
         return $this;
     }
 
-    public function canAddItem(Item $item)
+    public function canAddItem(Item $item, $em)
     {
         $today = new DateTime();
         $lastItem = $this->getLastItem();
@@ -97,7 +97,7 @@ class ToDoList
             throw new \Exception('L\'item est nul ou invalide');
         }
 
-        if(is_null($this->getUtilisateur()) || !$this->getUtilisateur()->isValid())
+        if(is_null($this->getUtilisateur()) || !$this->getUtilisateur()->isValid($em))
         {
             throw new \Exception('L\'utilisateur est nul ou invalide');
         }

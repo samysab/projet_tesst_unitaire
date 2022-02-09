@@ -5,14 +5,26 @@ use Carbon\Carbon;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Persistence\ObjectRepository;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class ToDolistTest extends TestCase
+
+class ToDolistTest extends KernelTestCase
 {
 
     private $user;
     private $todolist;
     private $item;
 
+    /** @var \Doctrine\ORM\EntityManager */
+    private $entityManager;
+    protected function setUp(): void
+    {
+        $kernel = self::bootKernel();
+        $this->entityManager = $kernel
+            ->getContainer()
+            ->get('doctrine')
+            ->getManager();
+    }
 
     public function testValidTodoList(){
         $u = new \App\Entity\User();
@@ -32,7 +44,7 @@ class ToDolistTest extends TestCase
 
         $todo->addItem($item);
 
-        $result = $todo->canAddItem($item);
+        $result = $todo->canAddItem($item, $this->entityManager);
 
 
         $this->assertEquals(true, $result, 'test todo');
@@ -57,7 +69,7 @@ class ToDolistTest extends TestCase
         $todo->addItem($item);
 
         $this->expectException(\Exception::class);
-        $result = $todo->canAddItem($item);
+        $result = $todo->canAddItem($item,$this->entityManager);
     }
 
     public function testTooMuchItem(){
@@ -88,7 +100,7 @@ class ToDolistTest extends TestCase
         )->method("getSizeTodolist")->willReturn("12");
 
         $this->expectException(\Exception::class);
-        $result = $todo->canAddItem($item); 
+        $result = $todo->canAddItem($item, $this->entityManager);
     }
 
 

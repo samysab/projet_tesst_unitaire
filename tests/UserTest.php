@@ -14,6 +14,14 @@ class UserTest extends KernelTestCase
 
     /** @var \Doctrine\ORM\EntityManager */
     private $entityManager;
+    protected function setUp(): void
+    {
+        $kernel = self::bootKernel();
+        $this->entityManager = $kernel
+            ->getContainer()
+            ->get('doctrine')
+            ->getManager();
+    }
 
     public function test_valid(){
         $u = new \App\Entity\User();
@@ -23,16 +31,10 @@ class UserTest extends KernelTestCase
         $u->setPassword("aaaaaaaaaaaaa");
         $u->setDateNaissance(Carbon::now()->subYears(21));
 
-        $kernel = self::bootKernel();
-        $this->entityManager = $kernel
-            ->getContainer()
-            ->get('doctrine')
-            ->getManager();
-
         $this->entityManager->persist($u);
         $this->entityManager->flush();
 
-        $result = $u->isValid();
+        $result = $u->isValid($this->entityManager);
         $this->assertEquals(true, $result, 'test valid');
     }
     
@@ -45,7 +47,7 @@ class UserTest extends KernelTestCase
         $u->setPassword("aaaaaaaaaaaaaa");
         $u->setDateNaissance(Carbon::now()->subYears(10));
         $this->expectException(Exception::class);
-        $result = $u->isValid();
+        $result = $u->isValid($this->entityManager);
     }
     public function test_valid_password(){
         $u = new \App\Entity\User();
@@ -54,7 +56,7 @@ class UserTest extends KernelTestCase
         $u->setEmail("samy@gmail.com");
         $u->setPassword("aaaaaaaaaaaaa");
         $u->setDateNaissance(Carbon::now()->subYears(21));
-        $result = $u->isValid();
+        $result = $u->isValid($this->entityManager);
         $this->assertEquals(true, $result, 'test password valid');
     }
 
@@ -67,8 +69,7 @@ class UserTest extends KernelTestCase
         $u->setPassword("ars");
         $u->setDateNaissance(Carbon::now()->subYears(21));
         $this->expectException(Exception::class);
-        $result = $u->isValid();
+        $result = $u->isValid($this->entityManager);
 
     }
-
 }

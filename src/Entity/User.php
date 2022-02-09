@@ -126,7 +126,7 @@ class User
         return $user;
     }
 
-    public function isValid(){
+    public function isValid($em){
         if ($this->email != null && filter_var($this->email, FILTER_VALIDATE_EMAIL)){
             if(strlen($this->getPassword()) > 8 && strlen($this->getPassword()) < 40){
                 if ($this->nom != null && $this->prenom != null){
@@ -137,6 +137,9 @@ class User
                         $todolist = new ToDoList();
                         $todolist->setUtilisateur($this);
 
+
+                        $em->persist($todolist);
+                        $em->flush();
                         return true;
                     }else{
                         throw new \Exception("trop petit");
